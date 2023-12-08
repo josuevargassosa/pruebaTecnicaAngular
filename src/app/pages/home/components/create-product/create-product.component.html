@@ -1,0 +1,121 @@
+<div class="outer-container">
+  <div class="container">
+    <div class="title">
+      <h1>Formulario de Registro</h1>
+    </div>
+    <form
+      class="form-container"
+      [formGroup]="productForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="grid-container">
+        <div>
+          <label for="name">ID:</label>
+          <input
+            type="text"
+            id="id"
+            name="id"
+            formControlName="id"
+            (input)="onIdInputChange()"
+          />
+          <div
+            *ngIf="
+              formControls['id'].errors &&
+              (formControls['id'].dirty || formControls['id'].touched)
+            "
+          >
+            <div>{{ getErrorMessage("id") }}</div>
+          </div>
+        </div>
+        <div>
+          <label for="name">Nombre:</label>
+          <input type="text" id="name" formControlName="name" />
+          <div
+            *ngIf="
+              formControls['name'].errors &&
+              (formControls['name'].dirty || formControls['name'].touched)
+            "
+          >
+            <div>{{ getErrorMessage("name") }}</div>
+          </div>
+        </div>
+        <div>
+          <label for="description">Descripción:</label>
+          <input id="description" formControlName="description" />
+          <div
+            *ngIf="
+              formControls['description'].errors &&
+              (formControls['description'].dirty ||
+                formControls['description'].touched)
+            "
+          >
+            <div>{{ getErrorMessage("description") }}</div>
+          </div>
+        </div>
+        <div>
+          <label for="logo">Logo:</label>
+          <input type="text" id="logo" formControlName="logo" />
+          <div
+            *ngIf="
+              formControls['logo'].errors &&
+              (formControls['logo'].dirty || formControls['logo'].touched)
+            "
+          >
+            <div>{{ getErrorMessage("logo") }}</div>
+          </div>
+        </div>
+        <div>
+          <label for="date_release">Fecha de liberación:</label>
+          <input
+            type="date"
+            id="date_release"
+            name="date_release"
+            required
+            formControlName="date_release"
+            min="{{ getCurrentDate() | date : 'yyyy-MM-dd' }}"
+            (change)="onDateReleaseChange($event)"
+          />
+          <div
+            *ngIf="
+              formControls['date_release'].errors &&
+              (formControls['date_release'].dirty ||
+                formControls['date_release'].touched)
+            "
+          >
+            <div>{{ getErrorMessage("date_release") }}</div>
+          </div>
+        </div>
+        <div>
+          <label for="date_revision">Fecha de revisión:</label>
+          <input
+            type="date"
+            id="date_revision"
+            formControlName="date_revision"
+            readonly
+          />
+          <div
+            *ngIf="
+              formControls['date_revision'].errors &&
+              (formControls['date_revision'].dirty ||
+                formControls['date_revision'].touched)
+            "
+          >
+            <div>{{ getErrorMessage("date_revision") }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button type="button" (click)="resetForm()">Reiniciar</button>
+        <button type="submit" [disabled]="productForm.invalid">Enviar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-alert-modal
+  *ngIf="isModalVisible"
+  [message]="message"
+  [showButtons]="showModalButtons"
+  [isModalVisible]="isModalVisible"
+  (cancelClicked)="closeModal()"
+></app-alert-modal>

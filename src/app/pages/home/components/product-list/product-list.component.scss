@@ -1,0 +1,209 @@
+.outer-container {
+  margin: 5%;
+  padding-top: 80px;
+  position: relative;
+}
+
+.container {
+  background-color: white;
+  height: auto;
+  padding: 25px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.table {
+  border: none;
+  width: 100%;
+}
+
+.table-striped {
+  tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+  }
+}
+
+.table td,
+.table th {
+  background-color: rgb(255, 237, 237);
+  padding: 10px;
+  margin: 0px;
+  height: 35px;
+  //min-width: 300px;
+  text-align: center;
+  @media (max-width: 868px) {
+    min-width: 140px;
+  }
+}
+
+.table th {
+  text-align: center;
+  font-weight: bold;
+}
+
+.table td {
+  background-color: white;
+}
+/* Estilos para el contenedor del dropdown */
+.dropdown {
+  position: relative; /* Cambiado a relative en lugar de absolute */
+  display: inline-block;
+  cursor: pointer; /* Movido de dropbtn para aplicar en todo el contenedor */
+
+  /* Estilos para el botón del dropdown */
+  .dropbtn {
+    background-color: transparent;
+    border: none;
+  }
+
+  /* Estilos para el contenido del dropdown */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Aparecerá debajo del botón */
+    right: 0; /* Ajusta la posición del contenido */
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+  }
+}
+
+/* Estilos para el dropdown */
+// .dropdown {
+//   position: absolute;
+//   display: inline-block;
+//   @media (max-width: 868px) {
+//     position: relative;
+//   }
+// }
+
+// /* Estilos para el botón del dropdown */
+// .dropbtn {
+//   background-color: transparent;
+//   border: none;
+//   cursor: pointer;
+// }
+
+// /* Estilos para el contenido del dropdown */
+// .dropdown-content {
+//   display: none;
+//   position: absolute; /* Posición absoluta para que el menú sobresalga */
+//   background-color: #f9f9f9;
+//   min-width: 100px;
+//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+//   z-index: 9999; /* Z-index más alto para que se muestre por encima */
+// }
+
+/* Estilos para mostrar el contenido del dropdown */
+// .dropdown:hover .dropdown-content {
+//   display: block;
+// }
+
+/* Estilos para los elementos dentro del dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Estilos al pasar el ratón por encima de los elementos del dropdown */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.info {
+  text-align: left;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.select-items-per-page {
+  padding: 10px 8px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  font-size: 14px;
+  width: 80px;
+  outline: none;
+  @media (max-width: 768px) {
+    width: 80px;
+  }
+}
+
+.search-container {
+  position: absolute;
+  top: 20px;
+  left: 0px;
+}
+
+.search-input {
+  padding: 15px 12px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  font-size: 14px;
+  width: 250px;
+  outline: none;
+  @media (max-width: 768px) {
+    width: 120px;
+  }
+}
+
+.no-results-table-message {
+  text-align: center;
+  padding: 15px;
+  min-width: 100%;
+  color: gray;
+}
+
+.button-container {
+  position: absolute;
+  top: 20px;
+  right: 0px;
+}
+
+.add-product {
+  background-color: rgb(241, 209, 30);
+  padding: 15px 20px;
+  border: none;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.skeleton-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.skeleton-row {
+  height: 50px;
+  background-color: #cfcfcf;
+  margin-bottom: 8px;
+  animation: skeleton-animation 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-animation {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}

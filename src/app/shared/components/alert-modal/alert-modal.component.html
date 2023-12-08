@@ -1,0 +1,14 @@
+<div class="modal" [ngClass]="{ 'show-modal': isModalVisible }">
+  <div class="modal-content">
+    <span class="close" (click)="onClose()">&times;</span>
+    <p>{{ message }}</p>
+    <div
+      *ngIf="showButtons"
+      [ngClass]="{ 'show-border-top': showButtons }"
+      class="modal-buttons"
+    >
+      <button class="cancel-button" (click)="onClose()">Cancelar</button>
+      <button class="confirm-button" (click)="onConfirm()">Confirmar</button>
+    </div>
+  </div>
+</div>

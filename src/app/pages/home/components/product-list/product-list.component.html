@@ -1,0 +1,102 @@
+<div class="outer-container">
+  <div class="search-container">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search..."
+      [(ngModel)]="searchText"
+      (input)="onSearch()"
+    />
+  </div>
+  <div class="button-container">
+    <button class="add-product" (click)="navigateToCreateProduct()">
+      Agregar
+    </button>
+  </div>
+  <div class="container">
+    <div *ngIf="isLoading; else loadedData">
+      <div class="skeleton-table">
+        <div class="skeleton-row"></div>
+        <div class="skeleton-row"></div>
+        <div class="skeleton-row"></div>
+      </div>
+    </div>
+    <ng-template #loadedData>
+      <div class="table-container">
+        <table class="table table-striped table-responsive">
+          <thead>
+            <tr>
+              <th>Logo</th>
+              <th>Nombre del producto</th>
+              <th>Descripción</th>
+              <th>Fecha de liberación</th>
+              <th>Fecha de restructuración</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of displayedProducts">
+              <td>
+                <img
+                  class="logo"
+                  [src]="product.logo"
+                  alt="Logo del producto"
+                />
+              </td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.description }}</td>
+              <td>{{ product.date_release | date }}</td>
+              <td>{{ product.date_revision | date }}</td>
+              <td class="dropdown-container">
+                <div
+                  class="dropdown"
+                  (click)="toggleDropdown($event, product.id)"
+                >
+                  <button class="dropbtn">&#8942;</button>
+                  <div
+                    class="dropdown-content"
+                    [ngStyle]="{
+                      display: isDropdownVisible[product.id] ? 'block' : 'none'
+                    }"
+                  >
+                    <a [routerLink]="['/home/edit-product', product.id]"
+                      >Editar</a
+                    >
+                    <a (click)="deleteElement(product)">Eliminar</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          *ngIf="displayedProducts.length === 0 || allProducts.length === 0"
+          class="no-results-table-message"
+        >
+          No se encontraron resultados para <b>'{{ searchText }}'</b>
+        </div>
+      </div>
+    </ng-template>
+    <div class="info">
+      <p>{{ totalRecords }} Resultados</p>
+      <select
+        class="select-items-per-page"
+        [(ngModel)]="itemsPerPage"
+        (ngModelChange)="onItemsPerPageChange($event)"
+      >
+        <option value="5" selected>5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<app-alert-modal
+  *ngIf="isModalVisible"
+  [message]="message"
+  [showButtons]="showModalButtons"
+  [isModalVisible]="isModalVisible"
+  (cancelClicked)="closeModal()"
+  (confirmClicked)="confirmAction()"
+></app-alert-modal>

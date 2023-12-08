@@ -1,0 +1,108 @@
+/* Estilos del modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  &.show-modal {
+    display: block;
+  }
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  border: 1px solid #888;
+  width: 60%;
+  max-width: 500px;
+  position: relative;
+  border-radius: 15px;
+
+  position: relative;
+
+  p {
+    padding: 20px;
+  }
+
+  span {
+    padding: 20px;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc; /* Línea separadora horizontal */
+  }
+
+  @media (max-width: 768px) {
+    width: 90%; /* Ancho del modal para dispositivos móviles */
+    max-width: none; /* Ancho máximo removido */
+    margin: auto; /* Centrado horizontal en dispositivos móviles */
+    position: absolute; /* Posición absoluta */
+    top: 50%; /* 50% desde la parte superior */
+    left: 50%; /* 50% desde la parte izquierda */
+    transform: translate(-50%, -50%); /* Centrar vertical y horizontalmente */
+    padding: 20px; /* Agregar espacio a los lados */
+  }
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-buttons {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 10px 0;
+  &.show-border-top {
+    border-top: 1px solid rgb(217, 217, 217);
+  }
+
+  button {
+    // margin: 5px;
+    // padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    margin: 10px 15px; /* Margen a los lados */
+    padding: 15px 60px; /* Ancho y altura de los botones */
+    font-size: 18px; /* Tamaño de fuente */
+    display: flex;
+  }
+  .cancel-button {
+    background-color: #ccc;
+    color: #000;
+  }
+
+  .confirm-button {
+    background-color: #ffcc00;
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    button {
+      padding: 12px 30px; /* Ajuste del padding en botones móviles */
+      font-size: 16px; /* Tamaño de fuente más pequeño para móviles */
+    }
+  }
+}
