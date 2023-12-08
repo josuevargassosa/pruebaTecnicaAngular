@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthorIdInterceptor } from './core/author-id.interceptor';
 import { FormsModule } from '@angular/forms';
 import { HomeModule } from './pages/home/home.module';
+import { DateService } from './services/date.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { HomeModule } from './pages/home/home.module';
   ],
   providers: [
     ProductService,
+    DateService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthorIdInterceptor,

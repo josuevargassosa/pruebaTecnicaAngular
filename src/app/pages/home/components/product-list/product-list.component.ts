@@ -1,12 +1,5 @@
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EMPTY, catchError, tap, throwError } from 'rxjs';
 import { ProductForm } from 'src/app/models/product-form';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -31,9 +24,7 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.fetchProducts();
-    }, 2000);
+    this.fetchProducts();
   }
 
   fetchProducts(): void {
@@ -47,6 +38,10 @@ export class ProductListComponent implements OnInit {
       },
       (error) => {
         console.error('Error al obtener productos financieros:', error);
+        this.openModal(
+          'Ocurrió un error al obtener los productos financieros.',
+          false
+        );
         this.isLoading = false;
       }
     );
@@ -61,7 +56,6 @@ export class ProductListComponent implements OnInit {
       this.totalRecords = this.displayedProducts.length;
       this.updateDisplayedProducts();
     }, 1000);
-    console.log('itemsPerPage', this.itemsPerPage);
   }
 
   onSearch(): void {
@@ -126,7 +120,6 @@ export class ProductListComponent implements OnInit {
   }
 
   private deleteProduct(productId: string): void {
-    console.log('Eliminando producto:', productId);
     this.productService.deleteFinancialProduct(productId).subscribe(
       (data) => this.handleDeleteSuccess(data),
       (error) => this.handleDeleteError(error)
@@ -140,7 +133,6 @@ export class ProductListComponent implements OnInit {
   }
 
   private handleDeleteSuccess(data: any): void {
-    console.log('Producto eliminado:', data);
     this.fetchProducts();
     this.closeModal();
     this.openModal(data, false);

@@ -3,14 +3,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductForm } from 'src/app/models/product-form';
 import { formatDate } from '@angular/common';
 import { ProductService } from 'src/app/services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ProductFormInterface } from 'src/app/models/product-form.interface';
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.scss'],
 })
-export class CreateProductComponent {
+export class CreateProductComponent implements ProductFormInterface {
   productForm!: FormGroup;
   isModalVisible: boolean = false;
   showModalButtons: boolean = true;
@@ -18,16 +19,16 @@ export class CreateProductComponent {
   message: string = '';
 
   constructor(
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private productService: ProductService
+    private productService: ProductService,
+    private dateService: DateService
   ) {}
 
   ngOnInit(): void {
-    this.initForm();
+    this.initializeForm();
   }
 
-  initForm(): void {
+  initializeForm(): void {
     this.productForm = this.formBuilder.group({
       id: [
         '',
@@ -63,6 +64,10 @@ export class CreateProductComponent {
     return this.productForm.controls;
   }
 
+  getCurrentDate() {
+    return this.dateService.getCurrentDate();
+  }
+
   getErrorMessage(controlName: string) {
     const control = this.productForm.get(controlName);
 
@@ -82,7 +87,6 @@ export class CreateProductComponent {
   }
 
   onIdInputChange(): void {
-    console.log('EVENT', this.formControls['id']!.value);
     this.checkProductExistence(this.formControls['id']!.value);
   }
 
@@ -109,11 +113,6 @@ export class CreateProductComponent {
     );
   }
 
-  getCurrentDate(): string {
-    const currentDate = new Date();
-    return currentDate.toISOString().split('T')[0];
-  }
-
   resetForm(): void {
     this.productForm.reset();
   }
@@ -135,10 +134,7 @@ export class CreateProductComponent {
   }
 
   calculateOneYearAfter(dateRelease: Date): Date {
-    const oneYearAfter = new Date(dateRelease);
-    oneYearAfter.setFullYear(oneYearAfter.getFullYear() + 1);
-    oneYearAfter.setDate(oneYearAfter.getDate() + 1);
-    return oneYearAfter;
+    return this.dateService.calculateOneYearAfter(dateRelease);
   }
 
   onSubmit() {
@@ -161,11 +157,9 @@ export class CreateProductComponent {
 
   private submitFormData(): void {
     const formData: ProductForm = this.productForm.value;
-    console.log(formData);
-    console.log('Formulario válido:', this.formControls['id'].errors);
+
     this.productService.createFinancialProduct(formData).subscribe(
       (data) => {
-        console.log('Producto financiero creado exitosamente:', data);
         this.openModal('Producto financiero creado exitosamente.', false);
         this.resetForm();
       },

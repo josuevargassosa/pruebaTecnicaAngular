@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductForm } from 'src/app/models/product-form';
+import { ProductFormInterface } from 'src/app/models/product-form.interface';
+import { DateService } from 'src/app/services/date.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -10,7 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.scss'],
 })
-export class EditProductComponent {
+export class EditProductComponent implements ProductFormInterface {
   allProducts: ProductForm[] = [];
   productForm!: FormGroup;
   productData!: ProductForm;
@@ -22,18 +24,23 @@ export class EditProductComponent {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private productService: ProductService
+    private productService: ProductService,
+    private dateService: DateService
   ) {}
 
   ngOnInit() {
     this.getAllProducts();
   }
 
+  getCurrentDate() {
+    return this.dateService.getCurrentDate();
+  }
+
   mensageAlert(message: string): void {
     alert(message);
   }
 
-  initForm(): void {
+  initializeForm(): void {
     this.productForm = this.formBuilder.group({
       id: [
         this.productData?.id,
@@ -61,11 +68,15 @@ export class EditProductComponent {
       ],
       logo: [this.productData?.logo, Validators.required],
       date_release: [
-        this.transformDate(this.productData.date_release.toString()),
+        this.dateService.transformDateYYYYMMDD(
+          this.productData.date_release.toString()
+        ),
         Validators.required,
       ],
       date_revision: [
-        this.transformDate(this.productData.date_revision.toString()),
+        this.dateService.transformDateYYYYMMDD(
+          this.productData.date_revision.toString()
+        ),
         Validators.required,
       ],
     });
@@ -78,7 +89,6 @@ export class EditProductComponent {
   getAllProducts(): void {
     this.productService.getFinancialProducts().subscribe(
       (data: ProductForm[]) => {
-        console.log('Productos financieros:', data);
         this.allProducts = data;
         this.checkProductId();
       },
@@ -98,8 +108,7 @@ export class EditProductComponent {
 
         if (foundProduct) {
           this.productData = foundProduct;
-          console.log('Producto encontrado:', this.productData);
-          this.initForm();
+          this.initializeForm();
         } else {
           this.mensageAlert('El producto no existe.');
         }
@@ -107,30 +116,11 @@ export class EditProductComponent {
     });
   }
 
-  transformDate(inputDate: string): string {
-    const date = new Date(inputDate);
-
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
-  }
-
-  getCurrentDate(): string {
-    const currentDate = new Date();
-    return currentDate.toISOString().split('T')[0];
-  }
-
   resetForm(): void {
     this.productForm.reset();
   }
 
   onDateReleaseChange(event: Event): void {
-    console.log(
-      'Fecha de lanzamiento:',
-      this.formControls['date_release']!.value
-    );
     const oneYearAfter = this.calculateOneYearAfter(
       new Date(this.formControls['date_release']!.value)
     );
@@ -143,10 +133,7 @@ export class EditProductComponent {
   }
 
   calculateOneYearAfter(dateRelease: Date): Date {
-    const oneYearAfter = new Date(dateRelease);
-    oneYearAfter.setFullYear(oneYearAfter.getFullYear() + 1);
-    oneYearAfter.setDate(oneYearAfter.getDate() + 1);
-    return oneYearAfter;
+    return this.dateService.calculateOneYearAfter(dateRelease);
   }
 
   onSubmit() {
@@ -159,10 +146,8 @@ export class EditProductComponent {
 
   private submitFormData(): void {
     const formData: ProductForm = this.productForm.value;
-    console.log(formData);
     this.productService.updateFinancialProduct(formData).subscribe(
       (data) => {
-        console.log('Producto financiero editado exitosamente:', data);
         this.openModal('Producto financiero editado exitosamente.', false);
         this.resetForm();
       },

@@ -22,9 +22,8 @@ export class ProductService {
   createFinancialProduct(newProduct: ProductForm): Observable<any> {
     return this.http.post<any>(`${this.apiURL}/bp/products`, newProduct).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log('error', error);
-        if (error.status === 206) {
-          return throwError('Mensaje de error código 206');
+        if (error.status === 206 && error.error) {
+          return throwError(error.error);
         } else {
           return throwError(error);
         }

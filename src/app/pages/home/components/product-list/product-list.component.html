@@ -45,8 +45,8 @@
               </td>
               <td>{{ product.name }}</td>
               <td>{{ product.description }}</td>
-              <td>{{ product.date_release | date }}</td>
-              <td>{{ product.date_revision | date }}</td>
+              <td>{{ product.date_release | date : "dd/MM/yyyy" : "UTC" }}</td>
+              <td>{{ product.date_revision | date : "dd/MM/yyyy" : "UTC" }}</td>
               <td class="dropdown-container">
                 <div
                   class="dropdown"

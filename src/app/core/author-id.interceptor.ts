@@ -25,29 +25,7 @@ export class AuthorIdInterceptor implements HttpInterceptor {
     return next.handle(clonedRequest).pipe(
       // Response
       catchError((error: HttpErrorResponse) => {
-        console.log('error', error);
-        let errorMessage = 'Error desconocido';
-        if (error.error instanceof ErrorEvent) {
-          errorMessage = `Error: ${error.error.message}`;
-        } else {
-          if (error.status === 200) {
-            errorMessage =
-              error.error?.returnMessage || 'Error inesperado en la respuesta.';
-          } else if (error.status === 400) {
-            errorMessage = 'Header ‘authorId’ is missing';
-          } else if (error.status === 206) {
-            errorMessage = 'name y description no deben ser nulo';
-          } else if (
-            error.status === 404 &&
-            request.url.includes('/bp/products')
-          ) {
-            errorMessage = 'Not product found with that id';
-          } else {
-            errorMessage = `Error ${error.status}: ${error.message}`;
-          }
-        }
-        console.error('Error en el interceptor:', errorMessage);
-        return throwError(errorMessage);
+        return throwError(error);
       })
     );
   }

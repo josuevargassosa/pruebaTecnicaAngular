@@ -67,7 +67,7 @@
             name="date_release"
             required
             formControlName="date_release"
-            min="{{ getCurrentDate() | date : 'yyyy-MM-dd' }}"
+            min="{{ getCurrentDate() | date : 'yyyy-MM-dd' : 'UTC' }}"
             (change)="onDateReleaseChange($event)"
           />
           <div
