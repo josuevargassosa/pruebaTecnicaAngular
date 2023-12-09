@@ -54,6 +54,11 @@
       }
     }
 
+    input.error-input {
+      border: 1px solid #ccc;
+      border-color: red;
+    }
+
     div {
       color: red;
       font-size: 12px;

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ProductForm } from 'src/app/models/product-form';
 import { formatDate } from '@angular/common';
 import { ProductService } from 'src/app/services/product.service';
@@ -15,7 +20,6 @@ export class CreateProductComponent implements ProductFormInterface {
   productForm!: FormGroup;
   isModalVisible: boolean = false;
   showModalButtons: boolean = true;
-
   message: string = '';
 
   constructor(
@@ -68,6 +72,11 @@ export class CreateProductComponent implements ProductFormInterface {
     return this.dateService.getCurrentDate();
   }
 
+  hasError(controlName: string) {
+    const control = this.formControls[controlName];
+    return control.errors && (control.dirty || control.touched);
+  }
+
   getErrorMessage(controlName: string) {
     const control = this.productForm.get(controlName);
 
@@ -98,6 +107,7 @@ export class CreateProductComponent implements ProductFormInterface {
 
         if (exists) {
           this.openModal('El producto existe.', false);
+          this.clearFormControl('id');
           idControl.setErrors({ ...errors, exists: true });
         } else {
           if (errors && errors['exists']) {
@@ -111,6 +121,13 @@ export class CreateProductComponent implements ProductFormInterface {
         alert('Error al verificar el producto.');
       }
     );
+  }
+
+  clearFormControl(id: string): void {
+    const control = this.productForm.get(id) as FormControl;
+    if (control) {
+      control.reset();
+    }
   }
 
   resetForm(): void {

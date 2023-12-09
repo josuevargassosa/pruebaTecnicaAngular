@@ -21,13 +21,13 @@
 
 .table-striped {
   tbody tr:nth-of-type(odd) {
-    background-color: #f9f9f9;
+    background-color: #f4f6f9;
   }
 }
 
 .table td,
 .table th {
-  background-color: rgb(255, 237, 237);
+  background-color: #f9fafc;
   padding: 10px;
   margin: 0px;
   height: 35px;
@@ -46,19 +46,17 @@
 .table td {
   background-color: white;
 }
-/* Estilos para el contenedor del dropdown */
-.dropdown {
-  position: relative; /* Cambiado a relative en lugar de absolute */
-  display: inline-block;
-  cursor: pointer; /* Movido de dropbtn para aplicar en todo el contenedor */
 
-  /* Estilos para el botón del dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
   .dropbtn {
     background-color: transparent;
     border: none;
   }
 
-  /* Estilos para el contenido del dropdown */
   .dropdown-content {
     display: none;
     position: absolute;
@@ -71,38 +69,6 @@
   }
 }
 
-/* Estilos para el dropdown */
-// .dropdown {
-//   position: absolute;
-//   display: inline-block;
-//   @media (max-width: 868px) {
-//     position: relative;
-//   }
-// }
-
-// /* Estilos para el botón del dropdown */
-// .dropbtn {
-//   background-color: transparent;
-//   border: none;
-//   cursor: pointer;
-// }
-
-// /* Estilos para el contenido del dropdown */
-// .dropdown-content {
-//   display: none;
-//   position: absolute; /* Posición absoluta para que el menú sobresalga */
-//   background-color: #f9f9f9;
-//   min-width: 100px;
-//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-//   z-index: 9999; /* Z-index más alto para que se muestre por encima */
-// }
-
-/* Estilos para mostrar el contenido del dropdown */
-// .dropdown:hover .dropdown-content {
-//   display: block;
-// }
-
-/* Estilos para los elementos dentro del dropdown */
 .dropdown-content a {
   color: black;
   padding: 8px 12px;
@@ -176,7 +142,7 @@
 }
 
 .add-product {
-  background-color: rgb(241, 209, 30);
+  background-color: #f9de4b;
   padding: 15px 20px;
   border: none;
   color: black;

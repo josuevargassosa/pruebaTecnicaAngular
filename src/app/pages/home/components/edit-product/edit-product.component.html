@@ -12,50 +12,49 @@
       <div class="grid-container">
         <div>
           <label for="name">ID:</label>
-          <input type="text" id="id" formControlName="id" readonly />
-          <div
-            *ngIf="
-              formControls['id'].errors &&
-              (formControls['id'].dirty || formControls['id'].touched)
-            "
-          >
+          <input
+            type="text"
+            id="id"
+            formControlName="id"
+            readonly
+            [ngClass]="{ 'error-input': hasError('id') }"
+          />
+          <div *ngIf="hasError('id')">
             <div>{{ getErrorMessage("id") }}</div>
           </div>
         </div>
         <div>
           <label for="name">Nombre:</label>
-          <input type="text" id="name" formControlName="name" />
-          <div
-            *ngIf="
-              formControls['name'].errors &&
-              (formControls['name'].dirty || formControls['name'].touched)
-            "
-          >
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            [ngClass]="{ 'error-input': hasError('name') }"
+          />
+          <div *ngIf="hasError('name')">
             <div>{{ getErrorMessage("name") }}</div>
           </div>
         </div>
         <div>
           <label for="description">Descripción:</label>
-          <input id="description" formControlName="description" />
-          <div
-            *ngIf="
-              formControls['description'].errors &&
-              (formControls['description'].dirty ||
-                formControls['description'].touched)
-            "
-          >
+          <input
+            id="description"
+            formControlName="description"
+            [ngClass]="{ 'error-input': hasError('description') }"
+          />
+          <div *ngIf="hasError('description')">
             <div>{{ getErrorMessage("description") }}</div>
           </div>
         </div>
         <div>
           <label for="logo">Logo:</label>
-          <input type="text" id="logo" formControlName="logo" />
-          <div
-            *ngIf="
-              formControls['logo'].errors &&
-              (formControls['logo'].dirty || formControls['logo'].touched)
-            "
-          >
+          <input
+            type="text"
+            id="logo"
+            formControlName="logo"
+            [ngClass]="{ 'error-input': hasError('logo') }"
+          />
+          <div *ngIf="hasError('logo')">
             <div>{{ getErrorMessage("logo") }}</div>
           </div>
         </div>
@@ -68,15 +67,10 @@
             required
             formControlName="date_release"
             min="{{ getCurrentDate() | date : 'yyyy-MM-dd' : 'UTC' }}"
-            (change)="onDateReleaseChange($event)"
+            (change)="onDateReleaseChange()"
+            [ngClass]="{ 'error-input': hasError('date_release') }"
           />
-          <div
-            *ngIf="
-              formControls['date_release'].errors &&
-              (formControls['date_release'].dirty ||
-                formControls['date_release'].touched)
-            "
-          >
+          <div *ngIf="hasError('date_release')">
             <div>{{ getErrorMessage("date_release") }}</div>
           </div>
         </div>
@@ -87,14 +81,9 @@
             id="date_revision"
             formControlName="date_revision"
             readonly
+            [ngClass]="{ 'error-input': hasError('date_revision') }"
           />
-          <div
-            *ngIf="
-              formControls['date_revision'].errors &&
-              (formControls['date_revision'].dirty ||
-                formControls['date_revision'].touched)
-            "
-          >
+          <div *ngIf="hasError('date_revision')">
             <div>{{ getErrorMessage("date_revision") }}</div>
           </div>
         </div>

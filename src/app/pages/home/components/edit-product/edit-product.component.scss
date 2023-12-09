@@ -53,7 +53,10 @@
         box-shadow: 0 0 5px rgba(0, 0, 255, 0.3);
       }
     }
-
+    input.error-input {
+      border: 1px solid #ccc;
+      border-color: red;
+    }
     div {
       color: red;
       font-size: 12px;

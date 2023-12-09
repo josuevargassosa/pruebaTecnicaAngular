@@ -1,6 +1,11 @@
 import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductForm } from 'src/app/models/product-form';
 import { ProductFormInterface } from 'src/app/models/product-form.interface';
@@ -34,6 +39,11 @@ export class EditProductComponent implements ProductFormInterface {
 
   getCurrentDate() {
     return this.dateService.getCurrentDate();
+  }
+
+  hasError(controlName: string) {
+    const control = this.formControls[controlName];
+    return control.errors && (control.dirty || control.touched);
   }
 
   mensageAlert(message: string): void {
@@ -120,7 +130,7 @@ export class EditProductComponent implements ProductFormInterface {
     this.productForm.reset();
   }
 
-  onDateReleaseChange(event: Event): void {
+  onDateReleaseChange(): void {
     const oneYearAfter = this.calculateOneYearAfter(
       new Date(this.formControls['date_release']!.value)
     );
