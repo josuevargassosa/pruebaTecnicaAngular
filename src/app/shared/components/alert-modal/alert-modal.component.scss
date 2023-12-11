@@ -78,15 +78,13 @@
   }
 
   button {
-    // margin: 5px;
-    // padding: 8px 16px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
     font-weight: bold;
-    margin: 10px 15px; /* Margen a los lados */
-    padding: 15px 60px; /* Ancho y altura de los botones */
-    font-size: 18px; /* Tamaño de fuente */
+    margin: 10px 15px;
+    padding: 15px 60px;
+    font-size: 18px;
     display: flex;
   }
   .cancel-button {
@@ -101,8 +99,8 @@
 
   @media (max-width: 768px) {
     button {
-      padding: 12px 30px; /* Ajuste del padding en botones móviles */
-      font-size: 16px; /* Tamaño de fuente más pequeño para móviles */
+      padding: 12px 30px;
+      font-size: 16px;
     }
   }
 }

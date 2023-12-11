@@ -5,7 +5,7 @@ import { CreateProductComponent } from './components/create-product/create-produ
 import { EditProductComponent } from './components/edit-product/edit-product.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'list-product', pathMatch: 'full' }, // Redirige a 'list-product' al inicio
+  { path: '', redirectTo: 'list-product', pathMatch: 'full' },
   { path: 'list-product', component: ProductListComponent },
   { path: 'create-product', component: CreateProductComponent },
   { path: 'edit-product/:id', component: EditProductComponent },

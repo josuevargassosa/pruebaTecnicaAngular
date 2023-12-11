@@ -69,17 +69,17 @@
 }
 
 input[type="text"][readonly] {
-  background-color: #f4f4f4; /* Color de fondo similar al deshabilitado */
-  color: #999; /* Color de texto más tenue */
-  border: 1px solid #ddd; /* Borde más claro */
-  cursor: not-allowed; /* Cursor de no permitido */
+  background-color: #f4f4f4;
+  color: #999;
+  border: 1px solid #ddd;
+  cursor: not-allowed;
 }
 
 input[type="date"][readonly] {
-  background-color: #f4f4f4; /* Color de fondo similar al deshabilitado */
-  color: #999; /* Color de texto más tenue */
-  border: 1px solid #ddd; /* Borde más claro */
-  cursor: not-allowed; /* Cursor de no permitido */
+  background-color: #f4f4f4;
+  color: #999;
+  border: 1px solid #ddd;
+  cursor: not-allowed;
 }
 
 .buttons {

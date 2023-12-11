@@ -104,7 +104,7 @@ export class ProductListComponent implements OnInit {
     this.isModalVisible = false;
   }
 
-  toggleDropdown(event: Event, itemId: string): void {
+  toggleDropdown(itemId: string): void {
     Object.keys(this.isDropdownVisible).forEach((key) => {
       if (key !== itemId) {
         this.isDropdownVisible[key] = false;

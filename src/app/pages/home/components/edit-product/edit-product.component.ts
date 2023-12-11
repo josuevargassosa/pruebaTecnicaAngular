@@ -54,27 +54,15 @@ export class EditProductComponent implements ProductFormInterface {
     this.productForm = this.formBuilder.group({
       id: [
         this.productData?.id,
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(10),
-        ],
+        [Validators.required, Validators.minLength(3)],
       ],
       name: [
         this.productData?.name,
-        [
-          Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(100),
-        ],
+        [Validators.required, Validators.minLength(5)],
       ],
       description: [
         this.productData?.description,
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(200),
-        ],
+        [Validators.required, Validators.minLength(10)],
       ],
       logo: [this.productData?.logo, Validators.required],
       date_release: [
@@ -174,7 +162,6 @@ export class EditProductComponent implements ProductFormInterface {
     });
   }
 
-  // Función para obtener mensajes de error dinámicos
   getErrorMessage(controlName: string) {
     const control = this.productForm.get(controlName);
 
@@ -183,12 +170,10 @@ export class EditProductComponent implements ProductFormInterface {
         return `El campo ${controlName} es obligatorio.`;
       } else if (control.errors['minlength']) {
         return `El ${controlName} debe tener al menos ${control.errors['minlength'].requiredLength} caracteres.`;
-      } else if (control.errors['maxlength']) {
-        return `El ${controlName} no debe exceder los ${control.errors['maxlength'].requiredLength} caracteres.`;
       }
     }
 
-    return '';
+    return ' ';
   }
 
   openModal(message: string, haveButtons: boolean) {

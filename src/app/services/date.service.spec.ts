@@ -36,7 +36,7 @@ describe('DateService', () => {
   it('should calculate one year after given date', () => {
     const dateRelease = new Date('2022-01-01');
     const oneYearAfter = service.calculateOneYearAfter(dateRelease);
-    const expectedDate = new Date('2023-01-02'); // Since it's adding one year and one day
+    const expectedDate = new Date('2023-01-02');
     expect(oneYearAfter.getTime()).toEqual(expectedDate.getTime());
   });
 });
